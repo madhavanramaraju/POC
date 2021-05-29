@@ -1,0 +1,60 @@
+<h1>Product Sales</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @product.each do |product| %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= product.price %></td>
+        <td><%= link_to "Scan Me", 
+        :controller => "products", 
+        :action => "index", 
+        :barcode => product.barcodeID %></td>
+        <td><%= link_to "Exit", 
+        :controller => "products", 
+        :action => "index", 
+        :exit => 1 %></td>
+      <tr>
+    <% end %>
+
+  <tr>
+    <th>LCD Display</th>
+  </tr>
+  <% if @products && @products[0].barcodeID > 0 
+     @products.each do |product| %>
+    <tr>
+      <td><%= product.name %></td>
+      <td><%= product.price %></td>
+    <tr>
+  <% end  
+   end %>
+
+  <tr>
+  <td><%= @msg %></td>  
+  <tr>
+
+  <tr>
+    <th>Printer</th>
+  </tr>
+
+  <% if @exit
+     @products.each do |item| %>
+    <tr>
+      <td><%= item.name %></td>
+      <td><%= item.price %></td>
+    <tr>
+  <% end %>
+  <tr>
+     <td>Total Amount: <%= @total %> </td>
+  </tr>
+  <% end %>
+
+  </tbody>
+</table>
